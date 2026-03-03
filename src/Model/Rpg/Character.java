@@ -5,11 +5,14 @@ public class Character {
     private int level;
     private int experience;
     private int experienceRequired;
+    private CharacterClass currentClass;
 
     private int intelligence;
     private int strength;
     private int agility;
     private int resistance;
+
+
 
     public Character(String name){
         this.name = name;
@@ -21,6 +24,20 @@ public class Character {
         this.strength = 1;
         this.agility = 1;
         this.resistance = 1;
+        this.currentClass = CharacterClass.NOVICE;
+    }
+
+    public CharacterClass getCurrentClass() {
+        return currentClass;
+    }
+
+    private void updateCharacterClass() {
+        CharacterClass newClass = CharacterClass.getBestFit(strength, intelligence, agility, resistance);
+
+        if (this.currentClass != newClass) {
+            this.currentClass = newClass;
+            System.out.println("Parabéns! " + name + " é agora um " + currentClass.getName() + "!");
+        }
     }
 
     public void QuestConclusion(int xp, String attribute, int points) {
@@ -41,6 +58,8 @@ public class Character {
                 this.resistance += points;
                 break;
         }
+
+        this.currentClass = CharacterClass.getBestFit(strength, intelligence, agility, resistance);
     }
 
     public void IncreseExperience(int amount){
@@ -56,7 +75,7 @@ public class Character {
 
         this.experienceRequired *= 1.5;
 
-        System.out.println("Parabéns! " + name + "alcançou o nível " + level + "!");
+        System.out.println("Parabéns! " + name + " alcançou o nível " + level + "!");
     }
 
     public String getName() { return name; }
