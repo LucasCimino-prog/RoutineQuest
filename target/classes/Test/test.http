@@ -1,0 +1,31 @@
+### Cadastro de Usuario
+POST http://localhost:8080/users/register
+Content-Type: application/json
+
+{
+  "name": "Lucas TCC",
+  "email": "lucas@teste.com",
+  "password": "123"
+}
+
+###
+
+### Teste de Login (Sucesso)
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "email": "lucas@teste.com",
+  "password": "123"
+}
+
+###
+
+### Teste de Login (Falha - Senha errada)
+POST http://localhost:8080/users/login
+Content-Type: application/json
+
+{
+  "email": "lucas@teste.com",
+  "password": "senha_errada"
+}
