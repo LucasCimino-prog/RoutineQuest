@@ -24,7 +24,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Desativa para facilitar testes via API
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/users/register", "/users/login").permitAll() // Portas abertas
+                        .requestMatchers("/users/register", "/users/login", "/tasks/**").permitAll() // Portas abertas
                         .anyRequest().authenticated() // Bloqueia o resto
                 );
         return http.build();

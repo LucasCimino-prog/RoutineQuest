@@ -29,3 +29,31 @@ Content-Type: application/json
   "email": "lucas@teste.com",
   "password": "senha_errada"
 }
+
+### Criar uma nova Task (Create)
+POST http://localhost:8080/tasks/user/1
+Content-Type: application/json
+
+{
+  "name": "Treino de Cardio",
+  "description": "Corrida de 30 minutos",
+  "xpReward": 100,
+  "attributeType": "Agility",
+  "attributePoints": 5,
+  "durationMinutes": 30
+}
+
+### Listar tarefas do usuario (Read)
+GET http://localhost:8080/tasks/user/1
+
+### Atualizar para Concluida (Update)
+PUT http://localhost:8080/tasks/1
+Content-Type: application/json
+
+{
+  "name": "Treino de Cardio",
+  "status": "COMPLETED",
+  "xpReward": 100,
+  "attributeType": "Agility",
+  "attributePoints": 5
+}
