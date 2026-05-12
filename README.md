@@ -43,6 +43,12 @@ Este repositório contém o **Backend (API)** do projeto, desenvolvido para a di
    ```bash
    git clone https://github.com/LucasCimino-prog/RoutineQuest.git
    
-2. Execute "RoutineQuestApplication"
+2. coloque a pasta "src" como source
 
-3. Execute "test.http"
+3. coloque a pasta "resources" como resource
+
+4. modifique o "application.properties" para seus dados do postgres, caso for necessário usar outra porta coloque "server.port=8081".
+
+5. Execute "RoutineQuestApplication"
+
+6. caso queira execute o test.http
