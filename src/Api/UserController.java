@@ -45,7 +45,7 @@ public class UserController {
             // Se a senha bater, gera e retorna o Token!
             if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
                 String token = jwtUtil.generateToken(user.getEmail());
-                return ResponseEntity.ok(new LoginResponse(token));
+                return ResponseEntity.ok(new LoginResponse(token, user.getId()));
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

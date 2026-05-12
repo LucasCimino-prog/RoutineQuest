@@ -30,7 +30,7 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
 
-        // --- A TRAVA DE NOME DUPLICADO ENTRA AQUI ---
+        // A TRAVA DE NOME DUPLICADO ENTRA AQUI
         if (taskRepository.existsByNameAndUserId(task.getName(), userId)) {
             // Retorna o status 409 (Conflito) para avisar o Android que o nome já existe
             return ResponseEntity.status(409).build();

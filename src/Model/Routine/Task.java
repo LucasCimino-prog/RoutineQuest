@@ -53,7 +53,7 @@ public class Task {
         this.status = TaskStatus.PENDING; // Toda tarefa nasce pendente
     }
 
-    // --- Metodos de Regra de Negocio ---
+    // Metodos de Regra de Negocio
     public void completeTask() {
         if (this.status == TaskStatus.PENDING) {
             this.status = TaskStatus.COMPLETED;
@@ -68,7 +68,7 @@ public class Task {
         }
     }
 
-    // --- Getters e Setters Padroes ---
+    // Getters e Setters Padroes
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
