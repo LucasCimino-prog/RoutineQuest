@@ -14,4 +14,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     // Busca tarefas do usuário onde o nome contenha o texto (ignorando maiúsculas/minúsculas)
     List<Task> findByUserIdAndNameContainingIgnoreCase(Long userId, String name);
     boolean existsByNameAndUserId(String name, Long userId);
+    boolean existsByNameAndUser_IdAndIdNot(String name, Long userId, Long id);
 }
