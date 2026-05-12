@@ -57,3 +57,19 @@ Content-Type: application/json
   "attributeType": "Agility",
   "attributePoints": 5
 }
+
+### Criar uma nova tarefa
+POST http://localhost:8080/tasks/user/1
+Content-Type: application/json
+
+{
+  "name": "Fazer 20 Flexões",
+  "description": "Treino matinal de calistenia",
+  "xpReward": 50,
+  "attributeType": "STRENGTH",
+  "attributePoints": 2,
+  "durationMinutes": 15
+}
+
+### Listar tarefas do usuário 1
+GET http://localhost:8080/tasks/user/1

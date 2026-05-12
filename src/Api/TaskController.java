@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     @Autowired
@@ -29,8 +30,14 @@ public class TaskController {
             return ResponseEntity.notFound().build();
         }
 
+        // --- A TRAVA DE NOME DUPLICADO ENTRA AQUI ---
+        if (taskRepository.existsByNameAndUserId(task.getName(), userId)) {
+            // Retorna o status 409 (Conflito) para avisar o Android que o nome já existe
+            return ResponseEntity.status(409).build();
+        }
+
         task.setUser(userOptional.get());
-        task.setStatus(Task.TaskStatus.PENDING); // Garante que nasce pendente
+        task.setStatus(Task.TaskStatus.PENDING);
         return ResponseEntity.ok(taskRepository.save(task));
     }
 
@@ -63,5 +70,15 @@ public class TaskController {
         }
         taskRepository.deleteById(taskId);
         return ResponseEntity.ok().build();
+    }
+
+    // ROTA DE BUSCA: /tasks/user/1/search?name=flexao
+    @GetMapping("/user/{userId}/search")
+    public ResponseEntity<List<Task>> searchTasks(
+            @PathVariable Long userId,
+            @RequestParam String name) {
+
+        List<Task> tasks = taskRepository.findByUserIdAndNameContainingIgnoreCase(userId, name);
+        return ResponseEntity.ok(tasks);
     }
 }
