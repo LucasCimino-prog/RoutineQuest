@@ -51,14 +51,24 @@ public class TaskController {
     @PutMapping("/{taskId}")
     public ResponseEntity<Task> updateTask(@PathVariable Long taskId, @RequestBody Task details) {
         return taskRepository.findById(taskId).map(task -> {
+
+            Long userId = task.getUser().getId();
+
+            // Verifica se já existe OUTRA tarefa desse usuário com esse nome
+            if (taskRepository.existsByNameAndUser_IdAndIdNot(details.getName(), userId, taskId)) {
+                return ResponseEntity.status(409).<Task>build();
+            }
+
             task.setName(details.getName());
             task.setDescription(details.getDescription());
             task.setXpReward(details.getXpReward());
             task.setAttributeType(details.getAttributeType());
             task.setAttributePoints(details.getAttributePoints());
             task.setDurationMinutes(details.getDurationMinutes());
-            task.setStatus(details.getStatus()); // Aqui voce muda para COMPLETED ou FAILED
+            task.setStatus(details.getStatus());
+
             return ResponseEntity.ok(taskRepository.save(task));
+
         }).orElse(ResponseEntity.notFound().build());
     }
 
